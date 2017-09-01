@@ -55,7 +55,8 @@ public class ViewTest extends OutputTest {
             "[13] -> Delete <Seller>" + "\n" +
             "[14] -> Delete <Product>" + "\n" +
             "[15] -> Delete <Buyer>" + "\n" +
-            "[16] -> Delete <Bid>" + "\n";
+            "[16] -> Delete <Bid>" + "\n" +
+            "[17] -> Complete <Auction>" + "\n";
 
     private final String stringNegative = "text";
     private final List<String> listQueryP = Arrays.asList("1|Dima|Pinchuk", "2|Evgeniy|Tyapunoff", "2|Sukin|Kot");
