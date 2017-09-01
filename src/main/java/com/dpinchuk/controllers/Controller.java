@@ -6,6 +6,8 @@ import com.dpinchuk.models.Buyer;
 import com.dpinchuk.models.Product;
 import com.dpinchuk.models.Seller;
 import com.dpinchuk.views.View;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,22 +21,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 public class Controller {
 
-    private List<Seller> sellersList = new ArrayList<>();
-    private List<Product> productsList = new ArrayList<>();
-    private List<Buyer> buyersList = new ArrayList<>();
-    private List<Bid> bidsList = new ArrayList<>();
+    List<Seller> sellersList = new ArrayList<>();
+    List<Product> productsList = new ArrayList<>();
+    List<Buyer> buyersList = new ArrayList<>();
+    List<Bid> bidsList = new ArrayList<>();
 
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private View view = new View();
-    private PreparedStatement preparedStatement;
-    private ResultSet resultQuery;
+    BufferedReader reader;
+    View view = new View();
+    PreparedStatement preparedStatement;
+    ResultSet resultQuery;
 
-    private Connection connection;
-    private Constructor constructor;
-    private Class[] parameters;
-    private List<String> list;
+    Connection connection;
+    Constructor constructor;
+    Class[] parameters;
+    List<String> list;
 
     public Controller(Connection connection) throws SQLException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         this.connection = connection;
@@ -50,6 +53,7 @@ public class Controller {
         this.addObjectToList("products", Product.class, this.productsList);
         this.addObjectToList("buyers", Buyer.class, this.buyersList);
         this.addObjectToList("bids", Bid.class, this.bidsList);
+        reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
     public void selectItem() throws IOException, SQLException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -172,7 +176,19 @@ public class Controller {
             this.constructor = modelClass.getConstructors()[0];
             this.parameters = constructor.getParameterTypes();
             String[] strings = Tools.getData(string);
-            list.add(modelClass.getConstructor(parameters).newInstance(strings));
+            Object[] obj = new Object[strings.length];
+            for (int i = 0; i < strings.length; i++) {
+                if (this.parameters[i].toString().contains("int")) {
+                    if (strings[i].equals("null")) {
+                        obj[i] = 0;
+                    } else {
+                        obj[i] = Integer.parseInt(strings[i]);
+                    }
+                } else {
+                    obj[i] = strings[i];
+                }
+            }
+            list.add(modelClass.getConstructor(parameters).newInstance(obj));
             string = "";
         }
         this.resultQuery.close();

@@ -1,24 +1,26 @@
 import com.dpinchuk.models.Buyer;
-import com.dpinchuk.models.Seller;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.Assert;
 import org.junit.Test;
 
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class BuyerTest {
 
-    private final String buyerId = "1";
-    private final String buyerName = "TestName";
-    private final String buyerLastname = "TestLastname";
-    private final Buyer buyer = new Buyer(this.buyerId, this.buyerName, this.buyerLastname);
+    int buyerId = 1;
+    String buyerName = "TestName";
+    String buyerLastname = "TestLastname";
+    Buyer buyer = new Buyer(this.buyerId, this.buyerName, this.buyerLastname);
 
-    private final int idP = 1;
-    private final String nameP = "TestName";
-    private final String lastnameP = "TestLastname";
+    int idP = 1;
+    String nameP = "TestName";
+    String lastnameP = "TestLastname";
 
-    private final int idN = 2;
-    private final String nameN = "FaketName";
-    private final String lastnameN = "FakeLastname";
+    int idN = 2;
+    String nameN = "FaketName";
+    String lastnameN = "FakeLastname";
 
-    private String[] idArrayNegative = {null, "`", "q", "ё", " ", "", "test"};
+    Integer[] idArrayNegative = {null, 0};
 
     @Test
     public void testBuyerPositive() {
@@ -34,10 +36,10 @@ public class BuyerTest {
         Assert.assertNotEquals(this.lastnameN, this.buyer.getBuyerLastname());
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = NullPointerException.class)
     public void testBuyerNumberFormatExceptionNegative() {
-        for (String id : idArrayNegative) {
-            new Seller(id, this.buyerName, this.buyerLastname);
+        for (int id : idArrayNegative) {
+            new Buyer(id, this.buyerName, this.buyerLastname);
         }
     }
 

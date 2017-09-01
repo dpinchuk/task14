@@ -1,29 +1,32 @@
 import com.dpinchuk.models.Bid;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.Assert;
 import org.junit.Test;
 
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class BidTest {
 
-    private String bidId = "1";
-    private String bidStep = "1000";
-    private String bidCurrent = "10000";
-    private String buyerId = "1";
-    private String productId = "1";
-    private final Bid bid = new Bid(this.bidId, this.bidStep, this.bidCurrent, this.buyerId, this.productId);
+    int bidId = 1;
+    int bidStep = 1000;
+    int bidCurrent = 10000;
+    int buyerId = 1;
+    int productId = 1;
+    Bid bid = new Bid(this.bidId, this.bidStep, this.bidCurrent, this.buyerId, this.productId);
 
-    private final int idP = 1;
-    private final int stepP = 1000;
-    private final int currentP = 10000;
-    private final int bIdP = 1;
-    private final int pIdP = 1;
+    int idP = 1;
+    int stepP = 1000;
+    int currentP = 10000;
+    int bIdP = 1;
+    int pIdP = 1;
 
-    private final int idN = 2;
-    private final int stepN = 2000;
-    private final int currentN = 30000;
-    private final int bIdN = 2;
-    private final int pIdN = 2;
+    int idN = 2;
+    int stepN = 2000;
+    int currentN = 30000;
+    int bIdN = 2;
+    int pIdN = 2;
 
-    private String[] idArrayNegative = {null, "`", "q", "ё", " ", "", "test"};
+    private Integer[] idArrayNegative = {null};
 
     @Test
     public void testProductPositive() {
@@ -43,9 +46,9 @@ public class BidTest {
         Assert.assertNotEquals(this.pIdN, this.bid.getProductId());
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = NullPointerException.class)
     public void testBuyerNumberFormatExceptionNegative() {
-        for (String number : idArrayNegative) {
+        for (int number : idArrayNegative) {
             new Bid(number, this.bidStep, this.bidCurrent, this.buyerId, this.productId);
             new Bid(this.bidId, number, this.bidCurrent, this.buyerId, this.productId);
             new Bid(this.bidId, this.bidStep, number, this.buyerId, this.productId);

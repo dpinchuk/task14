@@ -1,29 +1,32 @@
 import com.dpinchuk.models.Product;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.Assert;
 import org.junit.Test;
 
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ProductTest {
 
-    private final String productId = "1";
-    private final String productName = "TestProduct";
-    private final String productStartPrice = "1000";
-    private final String productSalePrice = "0";
-    private final String idSeller = "1";
-    private final Product product = new Product(this.productId, this.productName, this.productStartPrice, this.productSalePrice, this.idSeller);
+    int productId = 1;
+    String productName = "TestProduct";
+    int productStartPrice = 1000;
+    int productSalePrice = 0;
+    int idSeller = 1;
+    Product product = new Product(this.productId, this.productName, this.productStartPrice, this.productSalePrice, this.idSeller);
 
-    private final int idP = 1;
-    private final String nameP = "TestProduct";
-    private final int pPriceP = 1000;
-    private final int sPriceP = 0;
-    private final int sIdP = 1;
+    int idP = 1;
+    String nameP = "TestProduct";
+    int pPriceP = 1000;
+    int sPriceP = 0;
+    int sIdP = 1;
 
-    private final int idN = 2;
-    private final String nameN = "FakeProduct";
-    private final int pPriceN = 1001;
-    private final int sPriceN = 1;
-    private final int sIdN = 2;
+    int idN = 2;
+    String nameN = "FakeProduct";
+    int pPriceN = 1001;
+    int sPriceN = 1;
+    int sIdN = 2;
 
-    private String[] idArrayNegative = {null, "`", "q", "ё", " ", "", "test"};
+    private Integer[] idArrayNegative = {null};
 
     @Test
     public void testProductPositive() {
@@ -43,9 +46,9 @@ public class ProductTest {
         Assert.assertNotEquals(this.sIdN, this.product.getIdSeller());
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = NullPointerException.class)
     public void testBuyerNumberFormatExceptionNegative() {
-        for (String number : idArrayNegative) {
+        for (int number : idArrayNegative) {
             new Product(number, this.productName, this.productStartPrice, this.productSalePrice, this.idSeller);
             new Product(this.productId, this.productName, number, this.productSalePrice, this.idSeller);
             new Product(this.productId, this.productName, this.productStartPrice, number, this.idSeller);

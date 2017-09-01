@@ -1,29 +1,32 @@
 package com.dpinchuk.views;
 
 import com.dpinchuk.tools.Tools;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
+@FieldDefaults(makeFinal = true, level = AccessLevel.PUBLIC)
 public class View {
 
-    public final String[] addSellerString = {
+    String[] addSellerString = {
             "id",
             "[Seller <Name>]",
             "[Seller <Lastname>]"
     };
-    public final String[] addProductString = {
+    String[] addProductString = {
             "id",
             "[Product <Name>]",
             "[Product <Start Price>]",
             "[Product <Sale Price>]",
             "[Seller_ID] "
     };
-    public final String[] addBuyerString = {
+    String[] addBuyerString = {
             "id",
             "[Buyer <Name>]",
             "[Buyer <Lastname>]"
     };
-    public final String[] addBidString = {
+    String[] addBidString = {
             "id",
             "[Bid <Step>]",
             "[Bid <Current>]",
@@ -31,7 +34,7 @@ public class View {
             "[Product_ID] "
     };
 
-    public final String viewActions =
+    String viewActions =
             "Select an Item:" + "\n" +
                     "[0]  -> Exit from Auction" + "\n" +
                     "[1]  -> View <Sellers>" + "\n" +

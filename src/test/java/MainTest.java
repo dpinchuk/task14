@@ -1,4 +1,6 @@
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -7,13 +9,14 @@ import java.sql.SQLException;
 
 import static junit.framework.TestCase.*;
 
+@FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 public class MainTest {
 
-    private final String URL = "jdbc:mysql://127.0.0.1:3306";
-    private final String DB = "auction_db";
-    private final String USER = "dpinchuk";
-    private final String PASS = "dmss111278";
-    private Connection connection;
+    final String URL = "jdbc:mysql://127.0.0.1:3306";
+    final String DB = "auction_db";
+    final String USER = "dpinchuk";
+    final String PASS = "dmss111278";
+    Connection connection;
 
     @Test
     public void testIsValid() throws SQLException {

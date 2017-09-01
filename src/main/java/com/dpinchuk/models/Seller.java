@@ -1,18 +1,17 @@
 package com.dpinchuk.models;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Getter
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class Seller {
 
-    private int sellerId;
-    private String sellerName;
-    private String sellerLastname;
-
-    public Seller(String sellerId, String sellerName, String sellerLastname) {
-        this.sellerId = Integer.parseInt(sellerId);
-        this.sellerName = sellerName;
-        this.sellerLastname = sellerLastname;
-    }
+    int sellerId;
+    String sellerName;
+    String sellerLastname;
 
 }

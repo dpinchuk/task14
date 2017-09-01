@@ -1,23 +1,26 @@
 import com.dpinchuk.models.Seller;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.Assert;
 import org.junit.Test;
 
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class SellerTest {
 
-    private final String sellerId = "1";
-    private final String sellerName = "TestName";
-    private final String sellerLastname = "TestLastname";
-    private final Seller seller = new Seller(this.sellerId, this.sellerName, this.sellerLastname);
+    int sellerId = 1;
+    String sellerName = "TestName";
+    String sellerLastname = "TestLastname";
+    Seller seller = new Seller(this.sellerId, this.sellerName, this.sellerLastname);
 
-    private final int idP = 1;
-    private final String nameP = "TestName";
-    private final String lastnameP = "TestLastname";
+    int idP = 1;
+    String nameP = "TestName";
+    String lastnameP = "TestLastname";
 
-    private final int idN = 2;
-    private final String nameN = "FaketName";
-    private final String lastnameN = "FakeLastname";
+    int idN = 2;
+    String nameN = "FaketName";
+    String lastnameN = "FakeLastname";
 
-    private String[] idArrayNegative = {null, "`", "q", "ё", " ", "", "test"};
+    private Integer[] idArrayNegative = {null, 0};
 
     @Test
     public void testSellerPositive() {
@@ -33,9 +36,9 @@ public class SellerTest {
         Assert.assertNotEquals(this.lastnameN, this.seller.getSellerLastname());
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = NullPointerException.class)
     public void testSellerNumberFormatExceptionNegative() {
-        for (String id : idArrayNegative) {
+        for (int id : idArrayNegative) {
             new Seller(id, this.sellerName, this.sellerLastname);
         }
     }

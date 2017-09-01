@@ -1,5 +1,8 @@
 package com.dpinchuk.tools;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+
 public class Tools {
 
     public static final String EXIT = "0";
