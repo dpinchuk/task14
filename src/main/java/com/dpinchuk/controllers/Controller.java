@@ -60,6 +60,13 @@ public class Controller {
             if (param.equals(Tools.EXIT)) {
                 System.out.println("\n" + "Exit from <Auction>...");
                 break;
+            } else if (param.equals("17")) {
+                if (this.bidsList.size() == 0) {
+                    System.out.println("No more bids for auction! Auction comleted...");
+                    break;
+                } else {
+                    System.out.println("There are still bids! Auction not completed...");
+                }
             } else {
                 this.mainMenu(param);
             }
@@ -82,8 +89,6 @@ public class Controller {
 
     private void mainMenu(String action) throws IOException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         switch (action) {
-            case "0":
-                break;
             case "1":
                 list = new ArrayList<>();
                 for (Seller seller : this.sellersList) {
@@ -147,6 +152,8 @@ public class Controller {
                 break;
             case "16":
                 this.deleteEntityFromDB("bids", Bid.class, this.bidsList);
+                break;
+            case "17":
                 break;
             default:
                 break;

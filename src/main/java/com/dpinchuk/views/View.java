@@ -49,7 +49,8 @@ public class View {
                     "[13] -> Delete <Seller>" + "\n" +
                     "[14] -> Delete <Product>" + "\n" +
                     "[15] -> Delete <Buyer>" + "\n" +
-                    "[16] -> Delete <Bid>" + "\n";
+                    "[16] -> Delete <Bid>" + "\n" +
+                    "[17] -> Complete <Auction>" + "\n";
 
     public void printTableData(List<String> listQuery, String tableName, String[] columnNames, String format) {
         System.out.println("\n" + "[" + tableName + "]");
